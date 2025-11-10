@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { BACKEND_URL } from '../config/config';
+
 
 const ModelComponent = () => {
   const [selectedModel, setSelectedItem] = useState('');
@@ -19,7 +21,7 @@ const ModelComponent = () => {
 
     try {
       // Send a POST request to the Django backend
-      const response = await fetch('http://localhost:8000/api/run-model/', {
+      const response = await fetch(BACKEND_URL + 'run-model/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

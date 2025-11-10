@@ -9,7 +9,7 @@ export default function AssignmentUploader() {
     if (!file) return setMsg("select a file");
     const fd = new FormData();
     fd.append("file", file);
-    const res = await fetch("http://localhost:8000/api/upload-assignment/", {
+    const res = await fetch("http://annually-star-shrew.ngrok-free.app/api/upload-assignment/", {
       method: "POST",
       body: fd,
     });
