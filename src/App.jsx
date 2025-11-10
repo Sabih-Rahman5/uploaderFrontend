@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AssignmentUploader from "./components/AssignmentUploader";
-import KnowledgebaseUploader from "./components/knowledgeBaseUploader";
+// import KnowledgebaseUploader from "./components/nowledgeBaseUploader";
 // import AssignmentList from "./components/AssignmentList";
 import ModelComponent from "./components/modelComponent";
 // import DidMount from "./components/DidMount";
@@ -27,7 +27,7 @@ export default function App() {
         <section className="upload-section">
           <h2>Upload</h2>
           <AssignmentUploader />
-          <KnowledgebaseUploader />
+          {/* <KnowledgebaseUploader /> */}
         </section>
         <section className="model-section">
           <h2>Model List</h2>
