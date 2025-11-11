@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { BACKEND_URL } from '../config/config';
 
-
 const ModelComponent = () => {
   const [selectedModel, setSelectedItem] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [progress, setProgress] = useState(0); // Progress state
 
   const handleSelectChange = (event) => {
     setSelectedItem(event.target.value);
@@ -14,13 +15,14 @@ const ModelComponent = () => {
   const handleRunClick = async () => {
     if (!selectedModel) {
       setError('Please select a model');
-      return; // Stop the function if no model is selected
+      return;
     }
 
     console.log('Selected Item:', selectedModel);
+    setIsLoading(true); // Start loading
+    setProgress(0); // Reset progress
 
     try {
-      // Send a POST request to the Django backend
       const response = await fetch(BACKEND_URL + 'run-model/', {
         method: 'POST',
         headers: {
@@ -32,12 +34,27 @@ const ModelComponent = () => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log('Backend Response:', data.message); // "Item printed successfully"
+        console.log('Backend Response:', data.message);
+
+        // Simulate progress bar
+        let progressBar = 0;
+        const interval = setInterval(() => {
+          if (progressBar < 100) {
+            progressBar += 10; // Simulate progress
+            setProgress(progressBar);
+          } else {
+            clearInterval(interval); // Stop the progress when complete
+            setIsLoading(false); // Stop loading
+          }
+        }, 500); // Update every 500ms
       } else {
-        console.error('Error:', data.error); // "No item selected"
+        console.error('Error:', data.error);
+        setError(data.error);
+        setIsLoading(false);
       }
     } catch (error) {
       console.error('Error while sending request:', error);
+      setIsLoading(false);
     }
   };
 
@@ -45,12 +62,35 @@ const ModelComponent = () => {
     <div>
       <select value={selectedModel} onChange={handleSelectChange}>
         <option value="">Select an item</option>
-        <option value="LLama_3.2_4B">LLama 3.2 4B</option>
-        <option value="Gemma_3">Gemma 3</option>
-        <option value="DeepSeek_R1">DeepSeek R1</option>
+        <option value="DeepSeek-r1">DeepSeek-r1</option>
+        <option value="Gemma-3">Gemma-3</option>
+        <option value="Llama-3.2">Llama-3.2</option>
       </select>
-      <button onClick={handleRunClick}>Run</button>
-      {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error in red */}
+      <button onClick={handleRunClick} disabled={isLoading}>Run</button>
+      {isLoading && (
+        <div style={{ marginTop: '20px' }}>
+          <p>Loading... {progress}%</p>
+          <div
+            style={{
+              width: '100%',
+              height: '10px',
+              backgroundColor: '#e0e0e0',
+              borderRadius: '5px',
+              overflow: 'hidden',
+            }}
+          >
+            <div
+              style={{
+                height: '100%',
+                width: `${progress}%`,
+                backgroundColor: 'green',
+                transition: 'width 0.5s ease',
+              }}
+            ></div>
+          </div>
+        </div>
+      )}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 };
