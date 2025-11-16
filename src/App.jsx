@@ -4,7 +4,7 @@ import AssignmentUploader from "./components/AssignmentUploader";
 // import AssignmentList from "./components/AssignmentList";
 import ModelComponent from "./components/modelComponent";
 // import DidMount from "./components/DidMount";
-import "./App.css";
+import "../Styles/App.css";
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
