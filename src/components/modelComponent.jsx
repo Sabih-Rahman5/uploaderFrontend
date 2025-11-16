@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BACKEND_URL } from '../config/config';
-
-
-
-
-
-import React, { useState } from 'react';
 import axios from 'axios';
 
 const ModelComponent = () => {
