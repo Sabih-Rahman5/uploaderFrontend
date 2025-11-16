@@ -7,7 +7,7 @@ const ModelComponent = () => {
   const [responseMessage, setResponseMessage] = useState(''); // For displaying the response message
   
   // List of AI model names
-  const models = ['GPT-4', 'BERT', 'T5'];
+  const models = ['Gemma-3', 'DeepSeek-r1', 'Llama-3.2s'];
 
   const handleSelectionChange = (event) => {
     setSelectedModel(event.target.value);
