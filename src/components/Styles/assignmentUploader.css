@@ -1,0 +1,314 @@
+/* AssignmentUploader.css
+   Matches the main app theme and dark-mode variables.
+*/
+
+/* Container wrapper */
+.assignment-uploader {
+  background-color: var(--light-card-bg);
+  color: var(--light-text-color);
+  border: 1px solid var(--light-border-color);
+  box-shadow: var(--light-shadow);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Label */
+.assignment-uploader__label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--light-primary-color);
+}
+
+/* File Input */
+.assignment-uploader__input {
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--light-border-color);
+  background-color: var(--light-card-bg);
+  color: var(--light-text-color);
+  width: 100%;
+  cursor: pointer;
+}
+
+.assignment-uploader__input:hover {
+  border-color: var(--light-primary-color);
+}
+
+/* Upload Button */
+.assignment-uploader__button {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background-color: var(--light-primary-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.12s ease,
+              box-shadow 0.15s ease;
+}
+
+.assignment-uploader__button:hover {
+  background-color: var(--light-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Status Message */
+.assignment-uploader__message {
+  font-size: 0.92rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--light-primary-color);
+  color: var(--light-primary-color);
+  background-color: rgba(0, 123, 255, 0.08);
+  margin-top: 0.5rem;
+  word-break: break-word;
+}
+
+/* Dark Mode adjustments (automatic because of variables) */
+.dark-mode .assignment-uploader__message {
+  background-color: rgba(77, 182, 172, 0.15);
+}
+
+
+
+
+
+
+/* ===== Style the native file-button (modern + fallbacks) ===== */
+.assignment-uploader__input[type="file"] {
+  /* keep input container simple so button styles show */
+  background-color: transparent;
+  border: 1px solid var(--light-border-color);
+  padding: 0.35rem 0.5rem;
+  border-radius: 8px;
+  color: var(--light-text-color);
+}
+
+/* Standard (modern browsers) */
+.assignment-uploader__input[type="file"]::file-selector-button {
+  margin-right: 0.5rem;            /* space between button & filename */
+  padding: 0.45rem 0.75rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--light-primary-color);
+  color: var(--light-card-bg);
+}
+
+/* WebKit/Chromium older names */
+.assignment-uploader__input[type="file"]::-webkit-file-upload-button {
+  margin-right: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--light-primary-color);
+  color: var(--light-card-bg);
+}
+
+/* Legacy Edge/IE (if you need it) */
+.assignment-uploader__input[type="file"]::-ms-browse {
+  padding: 0.45rem 0.75rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--light-primary-color);
+  color: var(--light-card-bg);
+}
+
+/* Dark mode overrides (uses your dark-mode variables) */
+.dark-mode .assignment-uploader__input[type="file"]::file-selector-button,
+.dark-mode .assignment-uploader__input[type="file"]::-webkit-file-upload-button,
+.dark-mode .assignment-uploader__input[type="file"]::-ms-browse {
+  background: var(--light-primary-color);
+  color: var(--light-card-bg);
+  border: 1px solid var(--light-border-color);
+}
+
+
+
+
+
+
+
+
+/* ----------- SHARED UPLOADER BASE STYLES ----------- */
+.uploader-base {
+  background-color: var(--light-card-bg);
+  color: var(--light-text-color);
+  border: 1px solid var(--light-border-color);
+  box-shadow: var(--light-shadow);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.uploader-base__label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--light-primary-color);
+}
+
+.uploader-base__input {
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--light-border-color);
+  background-color: var(--light-card-bg);
+  color: var(--light-text-color);
+  width: 100%;
+  cursor: pointer;
+}
+
+.uploader-base__input:hover {
+  border-color: var(--light-primary-color);
+}
+
+.uploader-base__button {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background-color: var(--light-primary-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.12s ease,
+              box-shadow 0.15s ease;
+}
+
+.uploader-base__button:hover {
+  background-color: var(--light-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.uploader-base__message {
+  font-size: 0.92rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--light-primary-color);
+  color: var(--light-primary-color);
+  background-color: rgba(0, 123, 255, 0.08);
+  margin-top: 0.5rem;
+  word-break: break-word;
+}
+
+.dark-mode .uploader-base__message {
+  background-color: rgba(77, 182, 172, 0.15);
+}
+
+/* --------- SPECIFIC VARIANTS (Allows custom styling later) --------- */
+
+.assignment-uploader { }
+.assignment-uploader__label { }
+.assignment-uploader__input { }
+.assignment-uploader__button { }
+.assignment-uploader__message { }
+
+.knowledgebase-uploader { }
+.knowledgebase-uploader__label { }
+.knowledgebase-uploader__input { }
+.knowledgebase-uploader__button { }
+.knowledgebase-uploader__message { }
+
+.uploader-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--uploader-gap, 1rem); /* adjust value as needed */
+    width: 100%;
+    align-items: stretch;
+}
+
+
+
+
+
+
+/* ===== Style the native file-button for Knowledgebase uploader (modern + fallbacks) ===== */
+.knowledgebase-uploader__input[type="file"],
+.uploader-base__input[type="file"] {
+  /* keep the input container unopinionated so the internal button styling shows */
+  background-color: transparent;
+  border: 1px solid var(--light-border-color);
+  padding: 0.35rem 0.5rem;
+  border-radius: 8px;
+  color: var(--light-text-color);
+  width: 100%;
+  cursor: pointer;
+}
+
+/* Standard (modern browsers) */
+.knowledgebase-uploader__input[type="file"]::file-selector-button,
+.uploader-base__input[type="file"]::file-selector-button {
+  margin-right: 0.5rem;            /* space between button & filename */
+  padding: 0.45rem 0.75rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--light-primary-color);
+  color: var(--light-card-bg);
+}
+
+/* WebKit/Chromium fallback */
+.knowledgebase-uploader__input[type="file"]::-webkit-file-upload-button,
+.uploader-base__input[type="file"]::-webkit-file-upload-button {
+  margin-right: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--light-primary-color);
+  color: var(--light-card-bg);
+}
+
+/* Legacy Edge/IE fallback */
+.knowledgebase-uploader__input[type="file"]::-ms-browse,
+.uploader-base__input[type="file"]::-ms-browse {
+  padding: 0.45rem 0.75rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--light-primary-color);
+  color: var(--light-card-bg);
+}
+
+/* Dark mode overrides (use your dark-mode variables) */
+.dark-mode .knowledgebase-uploader__input[type="file"]::file-selector-button,
+.dark-mode .uploader-base__input[type="file"]::file-selector-button,
+.dark-mode .knowledgebase-uploader__input[type="file"]::-webkit-file-upload-button,
+.dark-mode .uploader-base__input[type="file"]::-webkit-file-upload-button,
+.dark-mode .knowledgebase-uploader__input[type="file"]::-ms-browse,
+.dark-mode .uploader-base__input[type="file"]::-ms-browse {
+  background: var(--light-primary-color);
+  color: var(--light-card-bg);
+  border: 1px solid var(--light-border-color);
+}
+
+/* Minor niceties: remove default expand arrow in IE/Edge (if present) */
+.knowledgebase-uploader__input[type="file"]::-ms-expand,
+.uploader-base__input[type="file"]::-ms-expand { display: none; }
+
+
+
+

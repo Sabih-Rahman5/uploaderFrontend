@@ -1,0 +1,226 @@
+/* ModelComponent.css
+   Styles designed to match the main app theme (uses the same CSS variables
+   defined in your main stylesheet and honors .dark-mode via those variables).
+*/
+
+/* Container / Card */
+.model-selector {
+  background-color: var(--light-card-bg);
+  color: var(--light-text-color);
+  border: 1px solid var(--light-border-color);
+  box-shadow: var(--light-shadow);
+  border-radius: 12px;
+  padding: 1rem;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.12s ease;
+}
+
+/* Title */
+.model-selector__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--light-primary-color);
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--light-border-color);
+}
+
+/* Dropdown / select */
+.model-selector__dropdown {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  border: 1px solid var(--light-border-color);
+  background: linear-gradient(180deg, transparent, transparent);
+  color: var(--light-text-color);
+  outline: none;
+  appearance: none; /* remove default arrow where possible */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  transition: box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+/* Add a custom arrow using background image (simple caret) */
+.model-selector__dropdown {
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--light-text-color) 50%),
+    linear-gradient(135deg, var(--light-text-color) 50%, transparent 50%);
+  background-position: calc(100% - 1rem) calc(50% - 0.15rem), calc(100% - 0.65rem) calc(50% - 0.15rem);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 2.25rem; /* room for the caret */
+}
+
+/* Styling for individual options (limited by browser control) */
+.model-selector__option {
+  padding: 0.5rem;
+  color: var(--light-text-color);
+}
+
+/* Focus state */
+.model-selector__dropdown:focus {
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.07);
+  border-color: var(--light-primary-color);
+}
+
+/* Button (Load) */
+.model-selector__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.98rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: var(--light-primary-color);
+  color: var(--light-card-bg);
+  transition: background-color 0.18s ease, transform 0.08s ease, box-shadow 0.12s ease;
+  min-height: 40px;
+}
+
+/* Hover / active */
+.model-selector__button:hover:not(:disabled) {
+  background-color: var(--light-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Disabled */
+.model-selector__button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Inline spinner shown when loading */
+.model-selector__spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--light-card-bg); /* visible contrast against primary */
+  border-right-color: var(--light-card-bg);
+  box-sizing: border-box;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+  animation: model-selector-spin 0.8s linear infinite;
+}
+
+/* If button is dark (card bg may be dark), invert spinner for contrast */
+.dark-mode .model-selector__spinner {
+  border-top-color: var(--light-text-color);
+  border-right-color: var(--light-text-color);
+}
+
+/* Spinner keyframes */
+@keyframes model-selector-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Status message below button */
+.model-selector__status {
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--light-primary-color);
+  background-color: rgba(0,0,0,0); /* keep subtle — main app uses a different message area */
+  border: 1px solid transparent;
+}
+
+/* Compact variant for narrow screens */
+@media (max-width: 480px) {
+  .model-selector {
+    padding: 0.85rem;
+    max-width: 100%;
+    border-radius: 10px;
+  }
+
+  .model-selector__title {
+    font-size: 1rem;
+  }
+
+  .model-selector__button {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .model-selector__dropdown {
+    font-size: 0.95rem;
+  }
+}
+
+/* Focus-visible for accessibility */
+.model-selector__button:focus-visible,
+.model-selector__dropdown:focus-visible {
+  outline: 3px solid rgba(77, 182, 172, 0.18);
+  outline-offset: 2px;
+}
+
+/* Subtle hover for the whole card */
+.model-selector:hover {
+  transform: translateY(-2px);
+}
+
+.model-selector__dropdown {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  border: 1px solid var(--light-border-color);
+
+  /* <-- Use background-color instead of the shorthand so it doesn't get overwritten */
+  background-color: var(--light-card-bg);
+
+  /* keep the custom caret using background-image (no shorthand) */
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--light-text-color) 50%),
+    linear-gradient(135deg, var(--light-text-color) 50%, transparent 50%);
+  background-position: calc(100% - 1rem) calc(50% - 0.15rem),
+                     calc(100% - 0.65rem) calc(50% - 0.15rem);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+
+  color: var(--light-text-color);
+  outline: none;
+  cursor: pointer;
+  transition: box-shadow 0.12s ease, border-color 0.12s ease;
+
+  /* remove native arrow where possible */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* hint to the browser that this control uses a dark color-scheme */
+  color-scheme: dark;
+}
+
+/* ensure dark-mode inherits the same variables (redundant but explicit) */
+.dark-mode .model-selector__dropdown {
+  background-color: var(--light-card-bg);
+  color: var(--light-text-color);
+  border-color: var(--light-border-color);
+}
+
+/* hide native expand arrow in IE/Edge */
+.model-selector__dropdown::-ms-expand { display: none; }
+
+
+/* Helpers in case you want the select to match the look of the rest of the app's inputs */
+.model-selector .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}

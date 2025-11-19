@@ -1,0 +1,215 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Light Mode Variables */
+  --light-bg-color: #f4f7fa;
+  --light-card-bg: #ffffff;
+  --light-text-color: #333333;
+  --light-primary-color: #007bff;
+  --light-primary-hover: #0056b3;
+  --light-secondary-color: #6c757d;
+  --light-gradient: linear-gradient(135deg, #e0f2ff, #f4f7fa);
+  --light-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --light-border-color: #e0e0e0;
+}
+
+.dark-mode {
+  /* Dark Mode Variables */
+  --light-bg-color: #1a1a2e;
+  --light-card-bg: #22223b;
+  --light-text-color: #e4e4e4;
+  --light-primary-color: #4db6ac; /* Teal */
+  --light-primary-hover: #00897b;
+  --light-secondary-color: #b0bec5;
+  --light-gradient: linear-gradient(135deg, #16213e, #1a1a2e);
+  --light-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --light-border-color: #3f3f5f;
+}
+
+/* --- BASE STYLES --- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.app-container {
+  /* CRITICAL CHANGE: Ensure it spans the full width of the viewport */
+  width: 100vw; 
+  min-height: 100vh;
+  padding: 0;
+  background: var(--light-gradient);
+  color: var(--light-text-color);
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- HEADER --- */
+header {
+  width: 100%;
+  background-color: var(--light-card-bg);
+  color: var(--light-text-color);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.theme-toggle-btn {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--light-primary-color);
+  border-radius: 20px;
+  background-color: transparent;
+  color: var(--light-primary-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--light-primary-color);
+  color: var(--light-card-bg);
+}
+
+/* --- MAIN CONTENT LAYOUT --- */
+.content-container {
+  width: 100%; 
+  max-width: none;
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column; /* Stacks sections vertically on small screens */
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+/* --- SECTION STYLES --- */
+.upload-section,
+.model-section {
+  background-color: var(--light-card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--light-shadow);
+  border: 1px solid var(--light-border-color);
+  flex: 1; /* Allows sections to grow and fill space */
+}
+
+h2 {
+  color: var(--light-primary-color);
+  border-bottom: 2px solid var(--light-border-color);
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+/* --- BUTTONS & INPUTS --- */
+.run-btn,
+.download-btn {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background-color: var(--light-primary-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s;
+}
+
+.run-btn:hover,
+.download-btn:hover {
+  background-color: var(--light-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.download-btn {
+  background-color: var(--light-secondary-color);
+}
+
+.download-btn:hover {
+  background-color: #5a6268;
+}
+
+/* Anchor tag for download button */
+.model-section > a {
+  text-decoration: none; /* Remove underline from anchor around button */
+  display: block; /* Make anchor take up full width */
+}
+
+/* --- TOGGLE FOR DETAILED OUTPUT --- */
+.toggle-detailed-output {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--light-border-color);
+}
+
+.toggle-detailed-output label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--light-text-color);
+}
+
+.toggle-detailed-output input[type="checkbox"] {
+  margin-right: 0.5rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--light-primary-color);
+}
+
+/* --- MESSAGE AREA --- */
+.inference-message {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background-color: rgba(var(--light-primary-color), 0.1);
+  color: var(--light-primary-color);
+  border: 1px solid var(--light-primary-color);
+  font-size: 0.9rem;
+}
+
+/* --- RESPONSIVE LAYOUT (Desktop/Tablet) --- */
+@media (min-width: 768px) {
+  header {
+    padding: 1rem 3rem;
+  }
+  
+  .content-container {
+    padding: 2rem 3rem;
+    flex-direction: row; /* Arranges sections side-by-side on larger screens */
+    gap: 2rem;
+  }
+
+  .upload-section {
+    flex: 1.5; /* Upload takes up more space */
+  }
+
+  .model-section {
+    flex: 1; /* Model list takes up less space */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Ensure model-section elements don't push the buttons too far down */
+  .model-section .run-btn,
+  .model-section .toggle-detailed-output,
+  .model-section .inference-message,
+  .model-section > a {
+    margin-top: 1rem;
+  }
+}
