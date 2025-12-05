@@ -4,11 +4,13 @@ import "./Styles/assignmentUploader.css";
 
 export default function AssignmentUploader() {
   const [file, setFile] = useState(null);
-  const [msg, setMsg] = useState("");
+  const [msgAssignment, setMsgAssignment] = useState("");
+  const [msgKnowledgeBase, setMsgKnowledgeBase] = useState("");
 
-  const submit = async (e) => {
+
+  const submitAssignment = async (e) => {
     e.preventDefault();
-    if (!file) return setMsg("select a file");
+    if (!file) return setMsgAssignment("select a file");
     const fd = new FormData();
     fd.append("file", file);
     const res = await fetch(BACKEND_URL + "upload-assignment/", {
@@ -16,13 +18,27 @@ export default function AssignmentUploader() {
       body: fd,
     });
     const data = await res.json();
-    setMsg("uploaded: " + (data.id || "unknown"));
+    setMsgAssignment("uploaded: " + (data.id || "unknown"));
+  };
+
+
+  const submitKnowledgeBase = async (e) => {
+    e.preventDefault();
+    if (!file) return setMsgKnowledgeBase("select a file");
+    const fd = new FormData();
+    fd.append("file", file);
+    const res = await fetch(BACKEND_URL + "upload-knowledgebase/", {
+      method: "POST",
+      body: fd,
+    });
+    const data = await res.json();
+    setMsgKnowledgeBase("uploaded: " + (data.id || "unknown"));
   };
 
   return (
     <section className="uploader-section">
       <div className="assignment-uploader">
-        <form onSubmit={submit}>
+        <form onSubmit={submitAssignment}>
           <label className="assignment-uploader__label">
             Assignment (PDF):
           </label>
@@ -39,11 +55,11 @@ export default function AssignmentUploader() {
           </button>
         </form>
 
-        {msg && <div className="assignment-uploader__message">{msg}</div>}
+        {msgAssignment && <div className="assignment-uploader__message">{msgAssignment}</div>}
       </div>
 
       <div className="knowledgebase-uploader uploader-base">
-        <form onSubmit={submit}>
+        <form onSubmit={submitKnowledgeBase}>
           <label className="knowledgebase-uploader__label uploader-base__label">
             Knowledgebase (PDF):
           </label>
@@ -63,9 +79,9 @@ export default function AssignmentUploader() {
           </button>
         </form>
 
-        {msg && (
+        {msgKnowledgeBase && (
           <div className="knowledgebase-uploader__message uploader-base__message">
-            {msg}
+            {msgKnowledgeBase}
           </div>
         )}
       </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BACKEND_URL } from "../config/config";
 
 export default function KnowledgebaseUploader() {
   const [file, setFile] = useState(null);
@@ -9,7 +10,7 @@ export default function KnowledgebaseUploader() {
     if (!file) return setMsg("select a file");
     const fd = new FormData();
     fd.append("file", file);
-    const res = await fetch("http://localhost:8000/api/upload-knowledgebase/", {
+    const res = await fetch(`${BACKEND_URL}/upload-knowledgebase/`, {
       method: "POST",
       body: fd,
     });

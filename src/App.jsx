@@ -7,6 +7,8 @@ import { BACKEND_URL } from "./config/config";
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isDetailedOutput, setIsDetailedOutput] = useState(false);
+  const [isStrict, setIsStrict] = useState(false);
+
   const [inferenceMessage, setInferenceMessage] = useState("");
   const [pdfUrl, setPdfUrl] = useState(""); // Store the PDF URL
 
@@ -16,6 +18,9 @@ export default function App() {
 
   const toggleDetailedOutput = () => {
     setIsDetailedOutput((prev) => !prev);
+  };
+    const toggleStrict = () => {
+    setIsStrict((prev) => !prev);
   };
 
   const runInference = async () => {
@@ -30,6 +35,7 @@ export default function App() {
         },
         body: JSON.stringify({
           detailedOutput: isDetailedOutput, // Send the toggle value
+          strictMode: isStrict
         }),
       });
       // 1. IF ERROR (Status 400 or 500) -> It returns JSON
@@ -88,7 +94,16 @@ export default function App() {
               />
               Enable Detailed Output
             </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={isStrict}
+                onChange={toggleStrict}
+              />
+              Enable Strict Mode
+            </label>
           </section>
+          
 
           {/* ---- MESSAGE AREA ---- */}
           {inferenceMessage && (
